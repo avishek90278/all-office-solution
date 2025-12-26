@@ -19,7 +19,8 @@ export default function PdfToJpgPage() {
 
         try {
             const response = await api.post('/pdf-to-jpg', formData);
-            setDownloadUrl(`http://localhost:3001${response.data.downloadUrl}`);
+            const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace('/api/pdf', '') || 'http://localhost:3001';
+            setDownloadUrl(`${baseUrl}${response.data.downloadUrl}`);
         } catch (err) {
             console.error(err);
         } finally {
